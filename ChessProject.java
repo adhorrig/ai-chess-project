@@ -221,7 +221,105 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 			demonstration purposes the Pawn here turns into a Queen.
 		*/
 
-    if(pieceName.contains("Rook")){
+    if (pieceName.contains("Queen")) {
+      Boolean inTheWay = false;
+      int distance = Math.abs(startX - landingX);
+      if (landingX < 0 || landingX > 7 || landingY < 0 || landingY > 7) {
+        validMove = false;
+      } else {
+        validMove = true;
+        if (Math.abs(startX - landingX) != 0 && Math.abs(startY - landingY) == 0 || Math.abs(startX - landingX) == 0 && Math.abs(landingY - startY) != 0) {
+          if (Math.abs(startX - landingX) != 0) {
+            xMovement = Math.abs(startX - landingX);
+            if (startX - landingX > 0) {
+              for (int i = 0; i < xMovement; i++) {
+                if (piecePresent(initialX - (i * 75), e.getY())) {
+                  inTheWay = true;
+                  break;
+                } else {
+                  inTheWay = false;
+                }
+
+              }
+            } else {
+              for (int i = 0; i < xMovement; i++) {
+                if (piecePresent(initialX - (i * 75), e.getY())) {
+                  inTheWay = true;
+                  break;
+                } else {
+                  inTheWay = false;
+                }
+              }
+            }
+          } else {
+            yMovement = Math.abs(startY - landingY);
+            if (startY - landingY > 0) {
+              for (int i = 0; i < yMovement; i++) {
+                if (piecePresent(e.getX(), initialY - (i * 75))) {
+                  inTheWay = true;
+                  break;
+                } else {
+                  inTheWay = false;
+                }
+              }
+            } else {
+              for (int i = 0; i < yMovement; i++) {
+                if (piecePresent(e.getX(), initialY + (i * 75))) {
+                  inTheWay = true;
+                  break;
+                } else {
+                  inTheWay = false;
+                }
+              }
+            }
+          }
+
+          if (Math.abs(startX - landingX) == Math.abs(startY - landingY)) {
+            if (startX - landingX < 0 && startY - landingY < 0) {
+              for (int i = 0; i < distance; i++) {
+                if (piecePresent((initialX + (i * 75)), (initialY + (i * 75)))) {
+                  inTheWay = true;
+                }
+              }
+            }
+          } else if (startX - landingX < 0 && startY - landingY > 0) {
+            for (int i = 0; i < distance; i++) {
+              if (piecePresent((initialX + (i * 75)), (initialY + (i * 75)))) {
+                inTheWay = true;
+              }
+            }
+          } else if (startX - landingX > 0 && startY - landingY > 0) {
+            for (int i = 0; i < distance; i++) {
+              if (piecePresent((initialX + (i * 75)), (initialY + (i * 75)))) {
+                inTheWay = true;
+              }
+            }
+          } else if (startX - landingX > 0 && startY - landingY < 0) {
+            for (int i = 0; i < distance; i++) {
+              if (piecePresent((initialX + (i * 75)), (initialY + (i * 75)))) {
+                inTheWay = true;
+              }
+            }
+          }
+        }
+
+        if (inTheWay) {
+          validMove = false;
+        } else {
+          if (piecePresent(e.getX(), e.getY())) {
+            if (pieceName.contains("White")) {
+              validMove = checkWhiteOponent(e.getX(), e.getY());
+            } else {
+              validMove = checkBlackOponent(e.getX(), e.getY());
+            }
+          } else {
+            validMove = true;
+          }
+        }
+      }
+    }
+
+    else if(pieceName.contains("Rook")){
       Boolean inTheWay = false;
       if(((landingX < 0 ) || (landingX > 7)) || ((landingY < 0)||(landingY > 7))){
         validMove = false;
