@@ -409,7 +409,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
   }
 
-    else if(pieceName.contains("Bishop")){
+    else if(pieceName.contains("Bishup")){
       Boolean inTheWay = false;
       int distance = Math.abs(startX-landingX);
       if(((landingX<0) || (landingX>7))||((landingY<0)||(landingY>7))){
