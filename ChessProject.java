@@ -639,7 +639,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
           int newX = e.getX()/75;
           if((startX-1 >=0)||(startX +1 <=7))
           {
-            if((piecePresent(e.getX(), (e.getY())))&&((((newX == (startX+1)&&(startX+1<=7)))||((newX == (startX-1))&&(startX-1 >=0)))))
+            if((xMovement==yMovement)&&(xMovement==1)&&(newY>startY))
             {
               if(checkWhiteOponent(e.getX(), e.getY())){
                 validMove = true;
