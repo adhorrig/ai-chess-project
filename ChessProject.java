@@ -156,6 +156,29 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     return oponent;
   }
 
+  private boolean kingPiece(int x, int y){
+    if(piecePresent(x,y)){
+      Component c1 = chessBoard.findComponentAt(x,y);
+      JLabel awaitingPiece = (JLabel)c1;
+      String tmp1 = awaitingPiece.getIcon().toString();
+      if(((tmp1.contains("King")))){
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private boolean checkTableForKingPieces(MouseEvent e) {
+    return kingPiece(e.getX() - 75, e.getY() - 75)
+            || kingPiece(e.getX() - 75, e.getY())
+            || kingPiece(e.getX() - 75, e.getY() + 75)
+            || kingPiece(e.getX() + 75, e.getY() - 75)
+            || kingPiece(e.getX(), e.getY() - 75)
+            || kingPiece(e.getX() + 75, e.getY())
+            || kingPiece(e.getX() + 75, e.getY() + 75)
+            || kingPiece(e.getX(), e.getY() + 75);
+  }
+
 	/*
 		This method is called when we press the Mouse. So we need to find out what piece we have
 		selected. We may also not have selected a piece!
@@ -238,23 +261,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     if (pieceName.contains("King")){
       if(isPlayersTurn(pieceName)){
         if ((landingX == (startX + 1)) || (landingY == (startY + 1) || landingX == (startX - 1)) || (landingY == (startY - 1))) {
-          if (piecePresent(e.getX(), e.getY())) {
-            if (pieceName.contains("White")) {
-              if (checkWhiteOponent(e.getX(), e.getY())) {
-                  validMove = true;
-              } else {
-                  validMove = false;
-              }
-            } else {
-              if (checkBlackOponent(e.getX(), e.getY())) {
-                  validMove = true;
-              } else {
-                  validMove = false;
-              }
-            }
-          } else {
-              validMove = true;
+          if(!checkTableForKingPieces(e)){
+            validMove = true;
           }
+        } else{
+          validMove = false;
         }
       }
     }
