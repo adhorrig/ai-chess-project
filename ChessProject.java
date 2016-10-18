@@ -522,43 +522,43 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
           }
         }
       }
+    }
 
-      else if(pieceName.contains("Knight")){
-        if(isPlayersTurn(pieceName)){
-          if(((landingX < 0)||(landingX>7))||((landingY<0)|| landingY > 7)){
-            validMove = false;
-          }
-          else{
-            if(((landingX == startX+1) && (landingY == startY+2)) || ((landingX==startX-1) &&(landingY ==
-            startY+2))||((landingX==startX+2) && (landingY == startY+1))||((landingX==startX-2) &&(landingY==
-            startY+1))||((landingX==startX+1) && (landingY == startY-2))||((landingX==startX-1) &&(landingY==
-            startY-2))||((landingX==startX+2) && (landingY == startY-1))||((landingX==startX-2) &&(landingY==
-            startY-1))){
-              if(piecePresent(e.getX(), (e.getY()))){
-                if(pieceName.contains("White")){
-                  if(checkWhiteOponent(e.getX(), e.getY())){
-                    validMove=true;
-                  }
-                  else{
-                    validMove=false;
-                  }
+    else if(pieceName.contains("Knight")){
+      if(isPlayersTurn(pieceName)){
+        if(((landingX < 0)||(landingX>7))||((landingY<0)|| landingY > 7)){
+          validMove = false;
+        }
+        else{
+          if(((landingX == startX+1) && (landingY == startY+2)) || ((landingX==startX-1) &&(landingY ==
+          startY+2))||((landingX==startX+2) && (landingY == startY+1))||((landingX==startX-2) &&(landingY==
+          startY+1))||((landingX==startX+1) && (landingY == startY-2))||((landingX==startX-1) &&(landingY==
+          startY-2))||((landingX==startX+2) && (landingY == startY-1))||((landingX==startX-2) &&(landingY==
+          startY-1))){
+            if(piecePresent(e.getX(), (e.getY()))){
+              if(pieceName.contains("White")){
+                if(checkWhiteOponent(e.getX(), e.getY())){
+                  validMove=true;
                 }
                 else{
-                  if(checkBlackOponent(e.getX(), e.getY())){
-                    validMove=true;
-                  }
-                  else{
-                    validMove=false;
-                  }
+                  validMove=false;
                 }
               }
               else{
-                validMove=true;
+                if(checkBlackOponent(e.getX(), e.getY())){
+                  validMove=true;
+                }
+                else{
+                  validMove=false;
+                }
               }
             }
             else{
-              validMove=false;
+              validMove=true;
             }
+          }
+          else{
+            validMove=false;
           }
         }
       }
@@ -703,20 +703,36 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
       }
 
 			if(success){
-				int location = 56 + (e.getX()/75);
-				if (c instanceof JLabel){
-	            	Container parent = c.getParent();
-	            	parent.remove(0);
-					pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
-					parent = (JPanel)chessBoard.getComponent(location);
-			    	parent.add(pieces);
-				}
-				else{
-					Container parent = (Container)c;
-	            	pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
-					parent = (JPanel)chessBoard.getComponent(location);
-			    	parent.add(pieces);
-				}
+        if(pieceName.equals("WhitePawn")){
+          int location = 56 + (e.getX()/75);
+          if (c instanceof JLabel){
+            Container parent = c.getParent();
+            parent.remove(0);
+            pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
+            parent = (JPanel)chessBoard.getComponent(location);
+            parent.add(pieces);
+          }
+          else{
+            Container parent = (Container)c;
+            pieces = new JLabel( new ImageIcon("WhiteQueen.png") );
+            parent = (JPanel)chessBoard.getComponent(location);
+            parent.add(pieces);
+          }
+        } else {
+          int location = 0 + (e.getX() / 75);
+          if (c instanceof JLabel) {
+            Container parent = c.getParent();
+            parent.remove(0);
+            pieces = new JLabel(new ImageIcon("BlackQueen.png"));
+            parent = (JPanel) chessBoard.getComponent(location);
+            parent.add(pieces);
+          } else {
+            Container parent = (Container) c;
+            pieces = new JLabel(new ImageIcon("BlackQueen.png"));
+            parent = (JPanel) chessBoard.getComponent(location);
+            parent.add(pieces);
+          }
+        }
 			}
 			else{
 				if (c instanceof JLabel){
