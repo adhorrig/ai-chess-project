@@ -641,16 +641,21 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
           {
             if((xMovement==yMovement)&&(xMovement==1)&&(newY>startY))
             {
-              if(checkWhiteOponent(e.getX(), e.getY())){
-                validMove = true;
-                if(startY == 6){
-                  success = true;
+              if(piecePresent(e.getX(), e.getY())){
+                if(checkWhiteOponent(e.getX(), e.getY())){
+                  validMove = true;
+                  if(startY == 6){
+                    success = true;
+                  }
                 }
-              }
-              else{
+                else{
+                  validMove = false;
+                }
+              } else {
                 validMove = false;
               }
             }
+
             else{
               if(!piecePresent(e.getX(), (e.getY()))){
                 if((startX == (e.getX()/75))&&((e.getY()/75)-startY)==1){
