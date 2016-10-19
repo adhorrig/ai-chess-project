@@ -14,13 +14,13 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     JLabel chessPiece;
     int xAdjustment;
     int yAdjustment;
-	int startX;
-	int startY;
-	int initialX;
-	int initialY;
-	JPanel panels;
-	JLabel pieces;
-  String turn = "White";
+  	int startX;
+  	int startY;
+  	int initialX;
+  	int initialY;
+  	JPanel panels;
+  	JLabel pieces;
+    String turn = "White";
 
 
     public ChessProject(){
@@ -271,7 +271,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 
     if (pieceName.contains("King")){
       if(isPlayersTurn(pieceName)){
-        if ((landingX == (startX + 1)) || (landingY == (startY + 1) || landingX == (startX - 1)) || (landingY == (startY - 1))) {
+        if ((xMovement == 0 && yMovement == 1 || xMovement == 1 && yMovement == 0 || xMovement == 1 && yMovement == 1)) {
           if(piecePresent(e.getX(), e.getY())){
             if(pieceName.contains("White")){
               if(checkWhiteOponent(e.getX(), e.getY())){
