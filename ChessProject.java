@@ -742,7 +742,19 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
   }
 
-  public static void main(String[] args) {
+  public void mouseClicked(MouseEvent e){
+  }
+
+  public void mouseMoved(MouseEvent e){
+  }
+
+  public void mouseEntered(MouseEvent e){
+  }
+
+  public void mouseExited(MouseEvent e){
+  }
+
+  public static void main(String[] args){
     JFrame frame = new ChessProject();
     frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE );
     frame.pack();
