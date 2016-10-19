@@ -179,6 +179,17 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
             || kingPiece(e.getX(), e.getY() + 75);
   }
 
+  private void winningMoveCheck(int x, int y) {
+    if (piecePresent(x,y)) {
+      Component c1 = chessBoard.findComponentAt(x, y);
+      JLabel awaitingPiece = (JLabel) c1;
+      String tmp1 = awaitingPiece.getIcon().toString();
+      if (tmp1.contains("King")) {
+        JOptionPane.showMessageDialog(null, this.turn + " Player wins!");
+      }
+    }
+  }
+
 	/*
 		This method is called when we press the Mouse. So we need to find out what piece we have
 		selected. We may also not have selected a piece!
@@ -705,6 +716,9 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
 		    panels.add(pieces);
 		}
 		else{
+
+       winningMoveCheck(e.getX(), e.getY());
+
       if (this.turn == "White") {
         System.out.println("It's player 2 turn");
         this.turn = "Black";
