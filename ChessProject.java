@@ -121,27 +121,26 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
   }
 
   private Boolean piecePresent(int x, int y){
-  	Component c = chessBoard.findComponentAt(x, y);
-  	if(c instanceof JPanel){
-  		return false;
-  	}
-  	else{
-  		return true;
-  	}
+    Component c = chessBoard.findComponentAt(x, y);
+    if(c instanceof JPanel){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   private Boolean checkWhiteOponent(int newX, int newY){
-  	Boolean oponent;
-  	Component c1 = chessBoard.findComponentAt(newX, newY);
-  	JLabel awaitingPiece = (JLabel)c1;
-  	String tmp1 = awaitingPiece.getIcon().toString();
-  	if(((tmp1.contains("Black")))){
-  		oponent = true;
-  	}
-  	else{
-  		oponent = false;
-  	}
-  	return oponent;
+    Boolean oponent;
+    Component c1 = chessBoard.findComponentAt(newX, newY);
+    JLabel awaitingPiece = (JLabel)c1;
+    String tmp1 = awaitingPiece.getIcon().toString();
+    if(((tmp1.contains("Black")))){
+      oponent = true;
+    } else {
+      oponent = false;
+    }
+    return oponent;
   }
 
   private boolean checkBlackOponent(int newX, int newY){
@@ -151,8 +150,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     String tmp1 = awaitingPiece.getIcon().toString();
     if(((tmp1.contains("White")))){
       oponent = true;
-    }
-    else{
+    } else {
       oponent = false;
     }
     return oponent;
@@ -235,11 +233,11 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
       return;
 
     chessPiece.setVisible(false);
-		Boolean success =false;
+    Boolean success =false;
     Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
-		String tmp = chessPiece.getIcon().toString();
-		String pieceName = tmp.substring(0, (tmp.length()-4));
-		Boolean validMove = false;
+    String tmp = chessPiece.getIcon().toString();
+    String pieceName = tmp.substring(0, (tmp.length()-4));
+    Boolean validMove = false;
     int landingX = (e.getX()/75);
     int landingY  = (e.getY()/75);
     int xMovement = Math.abs((e.getX()/75)-startX);
@@ -618,7 +616,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     }
 
 
-		else if(pieceName.equals("WhitePawn")){
+    else if(pieceName.equals("WhitePawn")){
       if(isPlayersTurn(pieceName)){
         if(startY == 1){
           if((startX == (e.getX()/75))&&((((e.getY()/75)-startY)==1)||((e.getY()/75)-startY)==2)){
@@ -677,7 +675,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
       }
     }
 
-		if(!validMove){
+    if(!validMove){
       int location=0;
       if(startY ==0){
       	location = startX;
@@ -698,7 +696,7 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
         this.turn = "White";
       }
 
-			if(success){
+      if(success){
         if(pieceName.equals("WhitePawn")){
           int location = 56 + (e.getX()/75);
           if (c instanceof JLabel){
@@ -730,18 +728,18 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
           }
         }
 			}
-			else {
-				if(c instanceof JLabel){
-        	Container parent = c.getParent();
-        	parent.remove(0);
-        	parent.add( chessPiece );
-      	} else {
+      else {
+        if(c instanceof JLabel){
+          Container parent = c.getParent();
+          parent.remove(0);
+          parent.add( chessPiece );
+        } else {
           Container parent = (Container)c;
-        	parent.add( chessPiece );
-      	}
-    		chessPiece.setVisible(true);
-			}
-		}
+          parent.add( chessPiece );
+        }
+        chessPiece.setVisible(true);
+      }
+    }
   }
 
   public static void main(String[] args) {
