@@ -272,10 +272,36 @@ public class ChessProject extends JFrame implements MouseListener, MouseMotionLi
     if (pieceName.contains("King")){
       if(isPlayersTurn(pieceName)){
         if ((landingX == (startX + 1)) || (landingY == (startY + 1) || landingX == (startX - 1)) || (landingY == (startY - 1))) {
-          if(!checkTableForKingPieces(e)){
-            validMove = true;
+          if(piecePresent(e.getX(), e.getY())){
+            if(pieceName.contains("White")){
+              if(checkWhiteOponent(e.getX(), e.getY())){
+                if(!checkTableForKingPieces(e)){
+                  validMove = true;
+                } else {
+                  validMove = false;
+                }
+              } else {
+                validMove = false;
+              }
+            } else {
+              if(checkBlackOponent(e.getX(), e.getY())){
+                if(!checkTableForKingPieces(e)){
+                  validMove = true;
+                } else {
+                  validMove = false;
+                }
+              } else {
+                validMove = false;
+              }
+            }
+          } else {
+            if(!checkTableForKingPieces(e)){
+              validMove = true;
+            } else {
+              validMove = false;
+            }
           }
-        } else{
+        } else {
           validMove = false;
         }
       }
